@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_time: 2015-08-04 00:22:48
+  campaign_id: 
+  brand_id: 
+  country_id: 
+  activity_id: 
+  end_time: 2015-08-04 00:22:48
+  sum_time: 1.5
+
+two:
+  date_time: 2015-08-04 00:22:48
+  campaign_id: 
+  brand_id: 
+  country_id: 
+  activity_id: 
+  end_time: 2015-08-04 00:22:48
+  sum_time: 1.5

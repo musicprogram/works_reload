@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date time:</strong>
+  <%= @board.date_time %>
+</p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @board.campaign.campaign_name %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @board.brand.brand_name %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @board.country.country_name %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @board.activity.activity_name %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @board.end_time %>
+</p>
+
+<p>
+  <strong>Sum time:</strong>
+  <%= @board.sum_time %>
+</p>
+
+<%= link_to 'Edit', edit_board_path(@board) %> |
+<%= link_to 'Back', boards_path %>

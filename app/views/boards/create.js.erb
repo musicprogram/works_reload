@@ -1,0 +1,11 @@
+$("#myModal").modal('hide');
+$(".board_datetime").val('');
+$(".board_campaign").val('');
+$(".board_brand").val('');
+$(".board_country").val('');
+$(".board_activity").val('');
+$(".board_endtime").val('');
+$(".board_sumtime").val('');
+
+$("#container_boards").prepend('<%= j render @board %>');
+$("#board_<%= @board.id %>").hide().fadeIn(1000);

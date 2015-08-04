@@ -1,0 +1,7 @@
+$("#myModal_<%= @board.id %>").modal('hide');
+$("#board_<%= @board.id %>").fadeOut(500, function(){
+
+	$(this).remove();
+	$("#container_boards").prepend('<%= j render @board %>');
+
+});

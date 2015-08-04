@@ -1,0 +1,70 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+Add Board
+</button>
+
+<div class="row" id="container_boards">
+  <%= render @boards %>
+</div>
+
+
+<!-- Modal -->
+<%= form_for(@board, remote: true) do |f| %>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">Boards</h4>
+    </div>
+    <div class="modal-body">
+   
+      <div class="field">
+    <%= f.label :date_time %><br>
+    <%= f.datetime_select :date_time, class:'board_datetime' %>
+  </div>
+  
+  
+  <div class="field">
+       Campaign <br>                    
+      <%= f.collection_select :campaign_id, Campaign.all, :id, :campaign_name, {prompt: "Select Campaign"},{class: "form-control board_campaign"} %>
+  </div>
+
+   <div class="field">
+       Brand <br>                    
+      <%= f.collection_select :brand_id, Brand.all, :id, :brand_name, {prompt: "Select Brand"},{class: "form-control board_brand"} %>
+  </div>
+  
+  <div class="field">
+       Country <br>                    
+      <%= f.collection_select :country_id, Country.all, :id, :country_name, {prompt: "Select Country"},{class: "form-control board_country"} %>
+  </div>
+ 
+ <div class="field">
+       Activity <br>                    
+      <%= f.collection_select :activity_id, Activity.all, :id, :activity_name, {prompt: "Select Activity"},{class: "form-control board_activity"} %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.datetime_select :end_time, class:'board_endtime' %>
+  </div>
+  <div class="field">
+ <br>
+    <%= f.text_field :sum_time, class:'board_sumtime', class:'invisible'%>
+  </div>
+   
+   
+   
+   
+   
+      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary"><%= f.submit %></button>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>
+
