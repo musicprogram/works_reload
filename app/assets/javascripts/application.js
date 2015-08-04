@@ -14,4 +14,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= jquery-ui.js
 //= require_tree .
+
+
+var x=$(document);
+x.ready(inicio);
+
+function inicio(){
+    var x;
+    x =$(".jumbotron");
+    x.draggable();
+}

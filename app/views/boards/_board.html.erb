@@ -1,8 +1,11 @@
 
 <div id="board_<%= board.id %>">
 
-<div class="jumbotron container">
+<div class="jumbotron container" id="muevemueve">
     
+    <% if board.date_time > board.end_time  %>
+       <i class="fa fa-exclamation fa-2x"> <p>ERROR DATE</p></i>
+    <%end%>
 <p>
   <strong>Date time:</strong>
   <%= board.date_time %>
@@ -33,20 +36,28 @@
   <%= board.end_time %>
 </p>
 
+
+
+<% if board.sum_time == nil ||  board.sum_time < 1 %>
+<i class="fa fa-exclamation fa-2x"> <p>ERROR TIME</p></i>
+<% elsif %>
 <p>
-  <strong>Minute:</strong>
-  <%= board.sum_time %>
+  <strong>Time Activity:</strong>
+  <%= board.sum_time %> Minutos
 </p>
+<% end %>
+
+
 
 
 
 
 	<div class="btn-group">
 		<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_<%= board.id %>">
+	<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal_<%= board.id %>">
 	  Edit
 	</button>
-	<%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class:'btn btn-primary btn-lg' %>
+	<%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class:'btn btn-default btn-lg' %>
 
 	</div>
 </div>
@@ -102,15 +113,11 @@
     <%= f.text_field :sum_time, class:'board_sumtime' , class:'invisible' %>
   </div>
    
-   
-   
-   
-	        
 	        
 	        
 	      </div>
 	      <div class="modal-footer">
-	             <button type="button" class="btn btn-primary"><%= f.submit %></button>
+	             <%= f.submit "Save", class:'btn btn-default' %>
 
 	      </div>
 	    </div>
