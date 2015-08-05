@@ -1,12 +1,66 @@
-<!-- Button trigger modal -->
+<body class="board">
+  
+  <header class="navbar">
+  <div class="container1">
+  
+  <i type="button" class="fa fa-plus fa-3x" data-toggle="modal" data-target="#myModal"></i>
+  <%= link_to  "<i class='fa fa-user-times fa-3x  logosalir'> </i> ".html_safe, destroy_user_session_path, :method => :delete %>
+   <% if current_user == User.find(1) %>
+     <%= link_to "<i class='fa fa-file-excel-o fa-3x'></i>".html_safe, boards_path(format: "xls") %> 
+   <%end%>
+  
+   <% if current_user == User.find(1) %>
+   
+       
+       
+      <%= link_to 'Campaign', campaigns_path %>
+      <%= link_to 'Activities', activities_path %>
+      <%= link_to 'Brands', brands_path %>
+      <%= link_to 'Countries', countries_path %>
+   <% end %>
+  </div>
+</header>
+
+  <!-- Button trigger modal -->
+<br></br> <br>
+
 
 <div class="container">
-  <i type="button" class="fa fa-plus fa-4x" data-toggle="modal" data-target="#myModal">
+  <div class="row">
+    <%= form_tag boards_path, :method => 'get' do %>
+      <div class="col-xs-12 col-md-4"></div>
+      
+     <div class="col-xs-12  col-md-4 ">
+       
+       <div class="col-xs-6 col-md-6">
+        <%= text_field_tag :search, params[:search], class:'form-control'%>
+       </div>
+       
+       <div class="col-xs-6 col-md-6">
+         <%= submit_tag "Search By Day", class:'btn btn-default' %>
+       </div>
+       
+        
+     </div>
+     
+     
+    <% end %>
+    
+    <div class="col-xs-12 col-md-4">
+      
+      <% if current_user == User.find(1)%>
+      
+        <h4 class="derecho"><span class="badge"> <%= @boards.count %> </span></h4 >
+      
+      <% end %>
 
-</i>
+    </div>
+  </div>
 </div>
 
-<div class="row" id="container_boards">
+<br>
+<div  id="container_boards">
+  
   <%= render @boards %>
 </div>
 
@@ -25,7 +79,7 @@
    
       <div class="field">
     <%= f.label :date_time %><br>
-    <%= f.datetime_select :date_time, class:'board_datetime' %>
+    <%= f.datetime_select :date_time, class:'board_datetime form-control' %>
   </div>
   
   
@@ -51,7 +105,7 @@
  
   <div class="field">
     <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time, class:'board_endtime' %>
+    <%= f.datetime_select :end_time, class:'board_endtime form-control' %>
   </div>
   <div class="field">
  <br>
@@ -64,10 +118,12 @@
    
       </div>
     <div class="modal-footer">
-      <%= f.submit "Save", class:'btn btn-default' %>
+      <%= f.submit "Save", class:'btn btn-default btn-lg btn-block' %>
     </div>
   </div>
 </div>
 </div>
 <% end %>
 
+
+</body>

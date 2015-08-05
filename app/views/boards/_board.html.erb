@@ -1,68 +1,175 @@
 
 <div id="board_<%= board.id %>">
+  
+  
+  <% if current_user == User.find(1) %>
+  
 
-<div class="jumbotron container" id="muevemueve">
-    
-    <% if board.date_time > board.end_time  %>
+
+  <div class="jumbotron container">
+  
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <b>User: </b><%= board.user.email %>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <% if board.date_time > board.end_time  %>
        <i class="fa fa-exclamation fa-2x"> <p>ERROR DATE</p></i>
-    <%end%>
-<p>
-  <strong>Date time:</strong>
-  <%= board.date_time %>
-</p>
+      <%end%>
 
-<p>
-  <strong>Campaign:</strong>
-  <%= board.campaign.campaign_name %>
-</p>
+      <b>Date time:</b>
+      <%= board.date_time.to_formatted_s(:short)  %>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">  
+      <b>Campaign:</b>
+      <%= board.campaign.campaign_name %>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <b>Brand:</b>
+      <%= board.brand.brand_name %>
 
-<p>
-  <strong>Brand:</strong>
-  <%= board.brand.brand_name %>
-</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+          
+      <b>Country:</b>
+      <%= board.country.country_name %>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      
+      <b>Activity:</b>
+      <%= board.activity.activity_name %>
+    </div>
+  </div>
+  
+   
+   <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-4 ">
+             
+      <b>End time:</b>
+      <%= board.end_time.to_formatted_s(:short)  %>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4">
+        <% if board.sum_time == nil ||  board.sum_time < 1 %>
+          <i class="fa fa-exclamation fa-2x"> <p>ERROR TIME</p></i>
+        <% elsif %>
+          <b>Time Activity:</b>
+          <%= board.sum_time %> Minutes
 
-<p>
-  <strong>Country:</strong>
-  <%= board.country.country_name %>
-</p>
+        <% end %>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4">
+       
+       <div class="col-xs-6 col-md-6">
+         
+       </div>
+       
+        <div class="col-xs-6 col-md-6">
+          <div class="btn-group">
+      	 
+        		<!-- Button trigger modal -->
+        	<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModal_<%= board.id %>">
+        	  <i class="fa fa-pencil fa-2x"></i>
+  
+        	</button>
+        	<%= link_to "<i class='fa fa-trash-o fa-2x'></i>".html_safe, board, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class:'btn btn-default ' %>
+        
+      	</div>
+        </div>
+       
+      	
+     </div>
+   </div>
+   
+   
 
-<p>
-  <strong>Activity:</strong>
-  <%= board.activity.activity_name %>
-</p>
+</div>
+  
+  
+  
+  
+  
+  
+  <% elsif current_user == board.user  %>
+  
+  
+ 
+  
+<div class="jumbotron container" id="muevemueve">
+  
+    <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <b>User: </b><%= board.user.email %>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <% if board.date_time > board.end_time  %>
+       <i class="fa fa-exclamation fa-2x"> <p>ERROR DATE</p></i>
+      <%end%>
 
-<p>
-  <strong>End time:</strong>
-  <%= board.end_time %>
-</p>
+      <b>Date time:</b>
+      <%= board.date_time %>
+    </div>
+    <div class="col-xs-12 col-md-4">  
+      <b>Campaign:</b>
+      <%= board.campaign.campaign_name %>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <b>Brand:</b>
+      <%= board.brand.brand_name %>
 
+    </div>
+    <div class="col-xs-12 col-md-4">
+          
+      <b>Country:</b>
+      <%= board.country.country_name %>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      
+      <b>Activity:</b>
+      <%= board.activity.activity_name %>
+    </div>
+  </div>
+  
+   
+   <div class="row">
+     <div class="col-xs-12  col-md-4 ">
+             
+      <b>End time:</b>
+      <%= board.end_time %>
+     </div>
+     <div class="col-xs-12  col-md-4">
+        <% if board.sum_time == nil ||  board.sum_time < 1 %>
+          <i class="fa fa-exclamation fa-2x"> <p>ERROR TIME</p></i>
+        <% elsif %>
+          <b>Time Activity:</b>
+          <%= board.sum_time %> Minutos
 
+        <% end %>
+     </div>
+     <div class="col-xs-12  col-md-4">
+       
+      	<div class="btn-group">
+      	 
+      	  		<!-- Button trigger modal -->
+        	<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModal_<%= board.id %>">
+        	  <i class="fa fa-pencil fa-2x"></i>
+  
+        	</button>
+        	<%= link_to "<i class='fa fa-trash-o fa-2x'></i>".html_safe, board, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class:'btn btn-default ' %>
+        
+      	</div>
+     </div>
+   </div>
+   
 
-<% if board.sum_time == nil ||  board.sum_time < 1 %>
-<i class="fa fa-exclamation fa-2x"> <p>ERROR TIME</p></i>
-<% elsif %>
-<p>
-  <strong>Time Activity:</strong>
-  <%= board.sum_time %> Minutos
-</p>
-<% end %>
-
-
-
-
-
-
-	<div class="btn-group">
-		<!-- Button trigger modal -->
-	<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal_<%= board.id %>">
-	  Edit
-	</button>
-	<%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class:'btn btn-default btn-lg' %>
-
-	</div>
 </div>
 
 
+  <%end%>
+    
 
 	<%= form_for(board, :method => :put, remote: true) do |f| %>
 
@@ -80,7 +187,7 @@
 	        
       <div class="field">
     <%= f.label :date_time %><br>
-    <%= f.datetime_select :date_time, class:'board_datetime' %>
+    <%= f.datetime_select :date_time, class:'board_datetime form-control' %>
   </div>
   
   
@@ -106,7 +213,7 @@
  
   <div class="field">
     <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time, class:'board_endtime' %>
+    <%= f.datetime_select :end_time, class:'board_endtime form-control' %>
   </div>
   <div class="field" >
 <br>
@@ -117,7 +224,7 @@
 	        
 	      </div>
 	      <div class="modal-footer">
-	             <%= f.submit "Save", class:'btn btn-default' %>
+	             <%= f.submit "Save", class:'btn btn-default btn-lg btn-block' %>
 
 	      </div>
 	    </div>

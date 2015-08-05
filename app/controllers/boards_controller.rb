@@ -1,11 +1,21 @@
 class BoardsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
   def index
-    @boards = Board.all
-    @board = Board.new
+    @boards = Board.search(params[:search])
+
+    @board = current_user.boards.build
+    
+    
+    respond_to do |format|
+      format.html
+      format.csv { send_data @boards.to_csv }
+      format.xls # { send_data @boards.to_csv(col_sep: "\t") }
+
+    end
   end
 
   # GET /boards/1
@@ -25,7 +35,7 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.json
   def create
-    @board = Board.new(board_params)
+    @board = current_user.boards.build(board_params)
 
     respond_to do |format|
       if @board.save

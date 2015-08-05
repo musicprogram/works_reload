@@ -12,6 +12,7 @@ class Board < ActiveRecord::Base
   belongs_to :brand
   belongs_to :country
   belongs_to :activity
+  belongs_to :user
   
   
   before_validation :sumar
@@ -23,5 +24,27 @@ class Board < ActiveRecord::Base
 	        
 	  self.sum_time = sum_time * -1
   end
+  
+  
+  def self.search(search)
+       
+        if search   
+            where(["date_time LIKE ?", "%#{search}%"])
+        else
+            all
+        end
+        
+  end
+  
+  def self.to_csv(options = {})
+  CSV.generate(options) do |csv|
+    csv << column_names
+    all.each do |board|
+      csv << board.attributes.values_at(*column_names)
+     end
+    end
+  end
+  
+  
   
 end

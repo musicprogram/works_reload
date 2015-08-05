@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">User_name</Data></Cell>
+        <Cell><Data ss:Type="String">Init_time</Data></Cell>
+        <Cell><Data ss:Type="String">Campaign</Data></Cell>
+        <Cell><Data ss:Type="String">Brand</Data></Cell>
+        <Cell><Data ss:Type="String">Country</Data></Cell>
+        <Cell><Data ss:Type="String">Activity</Data></Cell>
+        <Cell><Data ss:Type="String">End_time</Data></Cell>
+        <Cell><Data ss:Type="String">Minutes</Data></Cell>
+      </Row>
+    <% @boards.each do |board| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= board.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.user.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.date_time.to_formatted_s(:short) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.campaign.campaign_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.brand.brand_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.country.country_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.activity.activity_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.end_time.to_formatted_s(:short) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= board.sum_time %></Data></Cell>
+        
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
