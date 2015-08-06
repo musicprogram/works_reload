@@ -17,7 +17,7 @@
        <i class="fa fa-exclamation fa-2x"> <p>ERROR DATE</p></i>
       <%end%>
 
-      <b>Date time:</b>
+      <b>Init time:</b>
       <%= board.date_time.to_formatted_s(:short)  %>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4">  
@@ -55,14 +55,18 @@
           <i class="fa fa-exclamation fa-2x"> <p>ERROR TIME</p></i>
         <% elsif %>
           <b>Time Activity:</b>
-          <%= board.sum_time %> Minutes
-
+          
+          <% if board.sum_time == 1 %>
+               <%= board.sum_time.round(0) %> Minute
+          <% elsif%>
+              <%= board.sum_time.round(0) %> Minutes
+          <% end %>    
         <% end %>
      </div>
      <div class="col-xs-12 col-sm-6 col-md-4">
        
        <div class="col-xs-6 col-md-6">
-         
+          <h6> <em> Created <%= time_ago_in_words(board.created_at,include_seconds: true) %></em></h6>
        </div>
        
         <div class="col-xs-6 col-md-6">
@@ -99,34 +103,34 @@
 <div class="jumbotron container" id="muevemueve">
   
     <div class="row">
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
       <b>User: </b><%= board.user.email %>
     </div>
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
       <% if board.date_time > board.end_time  %>
        <i class="fa fa-exclamation fa-2x"> <p>ERROR DATE</p></i>
       <%end%>
 
-      <b>Date time:</b>
-      <%= board.date_time %>
+      <b>Init time:</b>
+      <%= board.date_time.to_formatted_s(:short) %>
     </div>
-    <div class="col-xs-12 col-md-4">  
+    <div class="col-xs-12 col-sm-6 col-md-4">  
       <b>Campaign:</b>
       <%= board.campaign.campaign_name %>
     </div>
   </div>
    <div class="row">
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
       <b>Brand:</b>
       <%= board.brand.brand_name %>
 
     </div>
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
           
       <b>Country:</b>
       <%= board.country.country_name %>
     </div>
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
       
       <b>Activity:</b>
       <%= board.activity.activity_name %>
@@ -135,25 +139,35 @@
   
    
    <div class="row">
-     <div class="col-xs-12  col-md-4 ">
+     <div class="col-xs-12 col-sm-6 col-md-4 ">
              
       <b>End time:</b>
-      <%= board.end_time %>
+      <%= board.end_time.to_formatted_s(:short) %>
      </div>
-     <div class="col-xs-12  col-md-4">
+     <div class="col-xs-12 col-sm-6 col-md-4">
         <% if board.sum_time == nil ||  board.sum_time < 1 %>
           <i class="fa fa-exclamation fa-2x"> <p>ERROR TIME</p></i>
         <% elsif %>
           <b>Time Activity:</b>
-          <%= board.sum_time %> Minutos
+          
+          <% if board.sum_time == 1 %>
+               <%= board.sum_time.round(0) %> Minute
+          <% elsif%>
+              <%= board.sum_time.round(0) %> Minutes
+          <% end %> 
 
         <% end %>
      </div>
-     <div class="col-xs-12  col-md-4">
+     <div class="col-xs-12 col-sm-6 col-md-4">
        
-      	<div class="btn-group">
+       <div class="col-xs-6 col-md-6">
+         <h6> <em> Created <%= time_ago_in_words(board.created_at,include_seconds: true) %></em></h6>
+       </div>
+       
+        <div class="col-xs-6 col-md-6">
+          <div class="btn-group">
       	 
-      	  		<!-- Button trigger modal -->
+        		<!-- Button trigger modal -->
         	<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModal_<%= board.id %>">
         	  <i class="fa fa-pencil fa-2x"></i>
   
@@ -161,6 +175,9 @@
         	<%= link_to "<i class='fa fa-trash-o fa-2x'></i>".html_safe, board, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class:'btn btn-default ' %>
         
       	</div>
+        </div>
+       
+      	
      </div>
    </div>
    
@@ -186,7 +203,7 @@
 	        
 	        
       <div class="field">
-    <%= f.label :date_time %><br>
+     Init time<br>
     <%= f.datetime_select :date_time, class:'board_datetime form-control' %>
   </div>
   
@@ -212,7 +229,7 @@
   </div>
  
   <div class="field">
-    <%= f.label :end_time %><br>
+    End time<br>
     <%= f.datetime_select :end_time, class:'board_endtime form-control' %>
   </div>
   <div class="field" >

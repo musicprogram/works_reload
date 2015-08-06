@@ -3,17 +3,14 @@
   <header class="navbar">
   <div class="container1">
   
-  <i type="button" class="fa fa-plus fa-3x" data-toggle="modal" data-target="#myModal"></i>
-  <%= link_to  "<i class='fa fa-user-times fa-3x  logosalir'> </i> ".html_safe, destroy_user_session_path, :method => :delete %>
+   <a type="button" class="fa fa-plus fa-3x" data-toggle="modal" data-target="#myModal"></a>
+    
    <% if current_user == User.find(1) %>
      <%= link_to "<i class='fa fa-file-excel-o fa-3x'></i>".html_safe, boards_path(format: "xls") %> 
    <%end%>
-  
+    <%= link_to  "<i class='fa fa-user-times fa-3x  logosalir'> </i> ".html_safe, destroy_user_session_path, :method => :delete %>
    <% if current_user == User.find(1) %>
-   
-       
-       
-      <%= link_to 'Campaign', campaigns_path %>
+      <%= link_to 'Campaigns', campaigns_path %>
       <%= link_to 'Activities', activities_path %>
       <%= link_to 'Brands', brands_path %>
       <%= link_to 'Countries', countries_path %>
@@ -78,7 +75,7 @@
     <div class="modal-body">
    
       <div class="field">
-    <%= f.label :date_time %><br>
+     Init time<br>
     <%= f.datetime_select :date_time, class:'board_datetime form-control' %>
   </div>
   
@@ -104,7 +101,7 @@
   </div>
  
   <div class="field">
-    <%= f.label :end_time %><br>
+    End time<br>
     <%= f.datetime_select :end_time, class:'board_endtime form-control' %>
   </div>
   <div class="field">
