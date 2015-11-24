@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150805003139) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.string   "activity_name"
     t.datetime "created_at",    null: false
@@ -32,10 +35,10 @@ ActiveRecord::Schema.define(version: 20150805003139) do
     t.integer  "user_id"
   end
 
-  add_index "boards", ["activity_id"], name: "index_boards_on_activity_id"
-  add_index "boards", ["brand_id"], name: "index_boards_on_brand_id"
-  add_index "boards", ["campaign_id"], name: "index_boards_on_campaign_id"
-  add_index "boards", ["country_id"], name: "index_boards_on_country_id"
+  add_index "boards", ["activity_id"], name: "index_boards_on_activity_id", using: :btree
+  add_index "boards", ["brand_id"], name: "index_boards_on_brand_id", using: :btree
+  add_index "boards", ["campaign_id"], name: "index_boards_on_campaign_id", using: :btree
+  add_index "boards", ["country_id"], name: "index_boards_on_country_id", using: :btree
 
   create_table "brands", force: :cascade do |t|
     t.string   "brand_name"
@@ -70,7 +73,11 @@ ActiveRecord::Schema.define(version: 20150805003139) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "boards", "activities"
+  add_foreign_key "boards", "brands"
+  add_foreign_key "boards", "campaigns"
+  add_foreign_key "boards", "countries"
 end
